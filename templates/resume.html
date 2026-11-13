@@ -1,0 +1,350 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="py-6 sm:py-10 max-w-5xl mx-auto px-4 sm:px-6">
+
+  <!-- ========================================================= -->
+  <!-- ACTION TOOLBAR (Hidden in Print) -->
+  <!-- ========================================================= -->
+  <div id="resumeToolbar"
+    class="no-print mb-8 p-4 rounded-xl bg-surface-container border border-outline-variant/80 shadow-lg flex flex-wrap items-center justify-between gap-4">
+    <!-- Left: Navigation & Status -->
+    <div class="flex items-center gap-3">
+      <a href="{{ url_for('index') }}"
+        class="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-low text-xs font-code-block text-on-surface hover:text-primary hover:border-primary transition-colors">
+        <span class="material-symbols-outlined text-sm">arrow_back</span>
+        <span>Back to Portfolio</span>
+      </a>
+      <div class="hidden sm:flex items-center gap-2 text-xs font-code-block text-on-surface-variant">
+        <span class="size-2 rounded-full bg-[#0bda57] animate-pulse"></span>
+        <span>Preview Mode · Verified Architecture</span>
+      </div>
+    </div>
+
+    <!-- Right: Actions (Share, Direct PDF, Download, Print) -->
+    <div class="flex flex-wrap items-center gap-2">
+      <!-- Share Link Button -->
+      <button id="shareResumeBtn" type="button"
+        class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-low text-xs font-code-block text-on-surface hover:text-primary hover:border-primary transition-colors"
+        title="Copy shareable link">
+        <span class="material-symbols-outlined text-sm">share</span>
+        <span>Share Link</span>
+      </button>
+
+      <!-- View Direct PDF in Browser -->
+      <a href="{{ url_for('view_resume_pdf') }}" target="_blank"
+        class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-low text-xs font-code-block text-on-surface hover:text-primary hover:border-primary transition-colors"
+        title="Open PDF directly in browser">
+        <span class="material-symbols-outlined text-sm">picture_as_pdf</span>
+        <span>Open PDF</span>
+      </a>
+
+      <!-- Print Button -->
+      <button onclick="window.print()" type="button"
+        class="hidden md:inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-low text-xs font-code-block text-on-surface hover:text-primary hover:border-primary transition-colors"
+        title="Print or save as PDF">
+        <span class="material-symbols-outlined text-sm">print</span>
+        <span>Print</span>
+      </button>
+
+      <!-- Download PDF Button (Primary CTA) -->
+      <a href="{{ url_for('download_resume') }}" download="Bonaventure_Chinonso_Mabia_Resume.pdf"
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-container text-on-surface-container font-bold text-xs tracking-wide hover:brightness-110 active:scale-[0.99] transition-all shadow-md shadow-primary-container/20">
+        <span class="material-symbols-outlined text-base">download</span>
+        <span>Download PDF</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="shareToast"
+    class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-surface-container-highest border border-primary text-white text-xs font-code-block px-4 py-3 rounded-lg shadow-2xl flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+    <span id="shareToastMsg">Resume link copied to clipboard!</span>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- RESUME DOCUMENT SHEET -->
+  <!-- ========================================================= -->
+  <div id="resumeDocument"
+    class="bg-surface-container-low border border-outline-variant/80 rounded-2xl p-6 sm:p-12 shadow-2xl transition-all">
+
+    <!-- Document Header -->
+    <header
+      class="border-b border-outline-variant/80 pb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <div class="flex-1">
+        <div class="flex items-center gap-3 mb-2">
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">{{ profile.name }}</h1>
+          <span
+            class="hidden sm:inline-block px-2.5 py-0.5 rounded text-[11px] font-code-block font-semibold bg-primary-container/20 border border-primary/40 text-primary">
+            {{ profile.availability_badge|default('READY FOR HIRE') }}
+          </span>
+        </div>
+        <p class="text-base sm:text-lg text-primary font-medium tracking-wide font-code-block">
+          {{ profile.title }}
+        </p>
+        <p class="text-xs text-on-surface-variant mt-2 max-w-2xl leading-relaxed">
+          {{ profile.hero_bio }}
+        </p>
+      </div>
+
+      <!-- Contact Info Card -->
+      <div
+        class="flex flex-col gap-1.5 text-xs font-code-block text-on-surface-variant bg-surface-container p-4 rounded-xl border border-outline-variant/60 w-full sm:w-auto">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary text-sm">mail</span>
+          <a href="mailto:{{ profile.email }}" class="hover:text-primary transition-colors">{{ profile.email }}</a>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary text-sm">schedule</span>
+          <span>{{ profile.timezone }}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary text-sm">code</span>
+          <a href="{{ profile.github }}" target="_blank" rel="noopener noreferrer"
+            class="hover:text-primary transition-colors">GitHub: @{{ profile.github_username }}</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Document Body -->
+    <div class="space-y-8 pt-8">
+
+      <!-- 1. TECHNICAL SKILLS MATRIX -->
+      <section>
+        <div class="flex items-center gap-2 mb-4">
+          <span class="material-symbols-outlined text-primary text-lg">terminal</span>
+          <h2 class="text-sm font-bold font-code-block uppercase tracking-wider text-white">Core Technical Competencies
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {% for tier in skills %}
+          <div
+            class="p-4 rounded-xl bg-surface-container/70 border border-outline-variant/60 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-white font-code-block">{{ tier.category }}</span>
+                <span
+                  class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-surface-container-high border border-outline-variant text-primary">{{
+                  tier.badge }}</span>
+              </div>
+              <p class="text-[11px] text-on-surface-variant mb-3 font-code-block">{{ tier.subtitle }}</p>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              {% for skill in tier.skills %}
+              <span
+                class="px-2 py-1 rounded text-[11px] font-code-block bg-surface-container-highest/80 border border-outline-variant/60 text-on-surface">
+                {{ skill }}
+              </span>
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- 2. FEATURED ENGINEERING PROJECTS & ARCHITECTURE -->
+      <section>
+        <div class="flex items-center gap-2 mb-4">
+          <span class="material-symbols-outlined text-primary text-lg">deployed_code</span>
+          <h2 class="text-sm font-bold font-code-block uppercase tracking-wider text-white">Engineered Systems &amp; Key
+            Projects</h2>
+        </div>
+
+        <div class="space-y-4">
+          {% for project in projects %}
+          <div class="p-4 sm:p-5 rounded-xl bg-surface-container/60 border border-outline-variant/60">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+              <h3 class="text-sm sm:text-base font-bold text-white tracking-wide">
+                {{ project.title }}
+              </h3>
+              <div class="flex items-center gap-2">
+                {% if project.demo_url.startswith('http') %}
+                <a href="{{ project.demo_url }}" target="_blank" rel="noopener noreferrer"
+                  class="text-[10px] font-code-block px-2 py-0.5 rounded bg-primary-container text-on-surface-container font-bold hover:brightness-110 transition-all inline-flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[12px]">launch</span>
+                  <span>{{ project.demo_url|replace('https://', '') }}</span>
+                </a>
+                {% endif %}
+                <span
+                  class="self-start sm:self-auto text-[10px] font-code-block uppercase px-2 py-0.5 rounded bg-primary/10 border border-primary/30 text-primary">
+                  {{ project.badge }}
+                </span>
+              </div>
+            </div>
+            <p class="text-xs text-on-surface-variant leading-relaxed mb-3">
+              {{ project.description }}
+            </p>
+            <div class="flex flex-wrap items-center gap-2 pt-1 border-t border-outline-variant/40">
+              <span class="text-[10px] font-code-block uppercase text-on-surface-variant tracking-wider">Stack
+                Architecture:</span>
+              {% for spec in project.specs %}
+              <span
+                class="text-[11px] font-code-block px-2 py-0.5 rounded bg-surface-container-highest border border-outline-variant/60 text-white">
+                <span class="text-primary font-medium">{{ spec.label }}:</span> {{ spec.value }}
+              </span>
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- 3. EDUCATION & PROFESSIONAL CERTIFICATIONS -->
+      <section>
+        <div class="flex items-center gap-2 mb-4">
+          <span class="material-symbols-outlined text-primary text-lg">school</span>
+          <h2 class="text-sm font-bold font-code-block uppercase tracking-wider text-white">Education &amp; Credentials
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {% for edu in education %}
+          <div
+            class="p-4 rounded-xl bg-surface-container/60 border border-outline-variant/60 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-1.5">
+                <span class="text-[10px] font-code-block uppercase px-2 py-0.5 rounded border {{ edu.badge_style }}">
+                  {{ edu.badge }}
+                </span>
+                <span class="text-[11px] font-code-block text-on-surface-variant">{{ edu.status }}</span>
+              </div>
+              <h3 class="text-xs sm:text-sm font-bold text-white mb-1 leading-snug">{{ edu.title }}</h3>
+              <p class="text-xs text-primary font-code-block mb-2">{{ edu.institution }}</p>
+              <p class="text-[11px] text-on-surface-variant leading-relaxed mb-3">{{ edu.description }}</p>
+            </div>
+            <div class="flex flex-wrap gap-1">
+              {% for tag in edu.tags %}
+              <span
+                class="px-1.5 py-0.5 rounded text-[10px] font-code-block bg-surface-container-high text-on-surface-variant">
+                #{{ tag }}
+              </span>
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Document Footer -->
+    <footer
+      class="mt-8 pt-6 border-t border-outline-variant/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-code-block text-on-surface-variant">
+      <div>
+        <span>Verified Technical Dossier · {{ profile.name }}</span>
+      </div>
+      <div>
+        <span>Target Roles: Full-Stack Engineer · DevOps / Cloud · Backend Specialist</span>
+      </div>
+    </footer>
+
+  </div>
+
+</div>
+
+<!-- ========================================================= -->
+<!-- PRINT STYLES & INTERACTIVE SCRIPT -->
+<!-- ========================================================= -->
+<style>
+  @media print {
+    body {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+    }
+
+    header,
+    footer,
+    #mobileDrawer,
+    #resumeToolbar,
+    #shareToast,
+    .no-print {
+      display: none !important;
+    }
+
+    #resumeDocument {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+      border: none !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+    }
+
+    #resumeDocument * {
+      color: #0f172a !important;
+      border-color: #cbd5e1 !important;
+    }
+
+    #resumeDocument .text-primary {
+      color: #0284c7 !important;
+    }
+
+    #resumeDocument .bg-surface-container,
+    #resumeDocument .bg-surface-container-low,
+    #resumeDocument .bg-surface-container-high,
+    #resumeDocument .bg-surface-container-highest {
+      background-color: #f8fafc !important;
+    }
+
+    #resumeDocument span {
+      background-color: #f1f5f9 !important;
+    }
+
+    @page {
+      size: A4;
+      margin: 15mm;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const shareBtn = document.getElementById('shareResumeBtn');
+    const toast = document.getElementById('shareToast');
+    const toastMsg = document.getElementById('shareToastMsg');
+
+    function showToast(msg) {
+      if (toast && toastMsg) {
+        toastMsg.textContent = msg;
+        toast.classList.remove('translate-y-20', 'opacity-0');
+        toast.classList.add('translate-y-0', 'opacity-100');
+        setTimeout(() => {
+          toast.classList.remove('translate-y-0', 'opacity-100');
+          toast.classList.add('translate-y-20', 'opacity-0');
+        }, 3000);
+      }
+    }
+
+    if (shareBtn) {
+      shareBtn.addEventListener('click', async () => {
+        const shareData = {
+          title: '{{ profile.name }} - Resume',
+          text: 'Technical Resume of {{ profile.name }} ({{ profile.title }})',
+          url: window.location.href
+        };
+
+        if (navigator.share) {
+          try {
+            await navigator.share(shareData);
+            return;
+          } catch (err) {
+            // Fallback to clipboard
+          }
+        }
+
+        if (navigator.clipboard) {
+          try {
+            await navigator.clipboard.writeText(window.location.href);
+            showToast('Resume link copied to clipboard!');
+          } catch (e) {
+            showToast('URL: ' + window.location.href);
+          }
+        } else {
+          showToast('URL: ' + window.location.href);
+        }
+      });
+    }
+  })();
+</script>
+{% endblock %}

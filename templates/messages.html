@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Messages Admin Log | {{ profile.name }}{% endblock %}
+
+{% block content %}
+<section class="max-w-5xl mx-auto px-6 py-16">
+  <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-outline-variant/60 pb-6 mb-8">
+    <div>
+      <div class="flex items-center gap-2 mb-1">
+        <span class="material-symbols-outlined text-primary text-lg">inbox</span>
+        <span class="font-code-block text-xs uppercase text-primary tracking-wider">Internal Admin Console</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+        Contact Form Inquiries (messages.txt)
+      </h1>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="px-3 py-1 rounded bg-surface-container border border-outline-variant text-xs font-code-block text-on-surface-variant">
+        Total: {{ messages|length }}
+      </span>
+      <a href="{{ url_for('index') }}" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded border border-outline-variant text-xs font-code-block text-white hover:border-primary transition-colors">
+        <span class="material-symbols-outlined text-sm">arrow_back</span>
+        <span>Back to Site</span>
+      </a>
+    </div>
+  </div>
+
+  {% if messages %}
+    <div class="flex flex-col gap-4">
+      {% for msg in messages|reverse %}
+        <div class="rounded-xl border border-outline-variant bg-surface-container-low p-5 flex flex-col gap-3 hover:border-outline transition-colors">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-outline-variant/40 pb-3">
+            <div class="flex items-center gap-3">
+              <div class="size-8 rounded bg-primary-container/10 text-primary-container flex items-center justify-center font-bold text-xs">
+                {{ msg.name[:1]|upper }}
+              </div>
+              <div>
+                <span class="text-white font-semibold text-sm">{{ msg.name }}</span>
+                <span class="text-outline text-xs ml-2 font-code-block">&lt;{{ msg.email }}&gt;</span>
+              </div>
+            </div>
+            <div class="text-[11px] font-code-block text-outline flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-xs">schedule</span>
+              <span>{{ msg.timestamp }}</span>
+            </div>
+          </div>
+          
+          {% if msg.subject %}
+            <div class="text-xs font-code-block text-primary font-medium">
+              Subject: {{ msg.subject }}
+            </div>
+          {% endif %}
+          
+          <div class="text-sm text-on-surface leading-relaxed whitespace-pre-wrap bg-surface-container/50 p-3.5 rounded-lg border border-outline-variant/30 font-body-md">
+            {{ msg.message }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="rounded-xl border border-outline-variant bg-surface-container-low p-12 text-center flex flex-col items-center justify-center">
+      <span class="material-symbols-outlined text-4xl text-outline mb-3">mark_email_read</span>
+      <h3 class="text-base font-bold text-white mb-1">No Messages Yet</h3>
+      <p class="text-xs text-on-surface-variant font-code-block max-w-sm mb-6">
+        When visitors submit the contact form on your portfolio, their submissions will be recorded to messages.txt and logged here.
+      </p>
+      <a href="{{ url_for('index') }}#contact" class="h-9 px-4 rounded bg-primary-container text-on-surface-container font-code-block text-xs font-bold inline-flex items-center gap-2">
+        <span>Go to Contact Form</span>
+      </a>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}
+

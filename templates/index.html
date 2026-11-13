@@ -1,0 +1,418 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="max-w-7xl mx-auto px-6 py-12 flex flex-col gap-24">
+
+  <!-- ======================================================= -->
+  <!-- HERO SECTION -->
+  <!-- ======================================================= -->
+  <section class="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 pt-6 lg:pt-12" id="hero">
+
+    <!-- Hero Left: Bio & Details -->
+    <div class="flex-1 flex flex-col gap-6 max-w-2xl">
+
+      <!-- Availability Chip -->
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary-container/30 bg-surface-container text-xs font-code-block text-primary w-fit shadow-inner">
+        <span class="size-2 rounded-full bg-[#0bda57] animate-pulse"></span>
+        <span>{{ profile.availability_status }}</span>
+      </div>
+
+      <!-- Main Headline -->
+      <div class="flex flex-col gap-3">
+        <h1
+          class="text-3xl sm:text-5xl lg:text-display-hero font-extrabold tracking-tight text-white leading-tight font-headline-lg">
+          {{ profile.name }}
+        </h1>
+        <p class="text-lg sm:text-xl font-semibold text-primary font-code-block tracking-tight">
+          {{ profile.title }}
+        </p>
+      </div>
+
+      <!-- Description -->
+      <p class="text-base sm:text-lg text-on-surface-variant leading-relaxed font-body-lg">
+        {{ profile.hero_bio }}
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap items-center gap-4 pt-2">
+        <a class="inline-flex items-center gap-2 h-11 px-6 rounded bg-primary-container text-on-surface-container font-bold text-sm tracking-wide hover:brightness-110 active:scale-[0.99] transition-all shadow-md shadow-primary-container/20"
+          href="{{ url_for('view_resume') }}">
+          <span class="material-symbols-outlined text-base">visibility</span>
+          <span>Preview Resume</span>
+        </a>
+        <a class="inline-flex items-center gap-2 h-11 px-5 rounded border border-outline-variant bg-surface-container text-xs font-code-block text-on-surface hover:border-primary transition-colors"
+          href="{{ profile.github }}" rel="noopener noreferrer" target="_blank">
+          <span class="material-symbols-outlined text-base">code</span>
+          <span>View GitHub</span>
+        </a>
+        <a class="inline-flex items-center gap-2 h-11 px-5 rounded border border-outline-variant bg-surface-container text-xs font-code-block text-on-surface hover:border-primary transition-colors"
+          href="#projects">
+          <span>Explore Projects</span>
+          <span class="material-symbols-outlined text-base">arrow_forward</span>
+        </a>
+      </div>
+
+      <!-- Architecture Highlights Badges -->
+      <div
+        class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-6 border-t border-outline-variant/60 font-code-block text-xs">
+        {% for badge in profile.architecture_highlights %}
+        <div class="p-3 rounded-lg border border-outline-variant bg-surface-container-low flex flex-col gap-1">
+          <div class="flex items-center justify-between text-outline text-[10px] uppercase">
+            <span>{{ badge.tag }}</span>
+            <span class="material-symbols-outlined text-sm text-primary">{{ badge.icon }}</span>
+          </div>
+          <div class="font-bold text-white text-sm">{{ badge.title }}</div>
+          <div class="text-[11px] text-on-surface-variant flex items-center gap-1">
+            <span class="material-symbols-outlined text-xs text-[#0bda57]">{{ badge.status_icon }}</span>
+            <span>{{ badge.subtitle }}</span>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+
+    <!-- Hero Right: Avatar Card -->
+    <div class="w-full lg:w-96 flex flex-col items-center">
+      <div class="relative group">
+        <!-- Glow accent -->
+        <div
+          class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-primary-container to-secondary-container opacity-25 blur-lg group-hover:opacity-40 transition-opacity">
+        </div>
+
+        <!-- Profile Image Container -->
+        <div
+          class="relative w-64 sm:w-80 aspect-[3/4] rounded-2xl overflow-hidden border border-outline-variant bg-surface-container-low p-2 shadow-2xl">
+          <img alt="{{ profile.name }}" class="w-full h-full object-cover object-top rounded-xl filter contrast-[1.02]"
+            src="{{ url_for('static', filename=profile.avatar) }}">
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ======================================================= -->
+  <!-- SKILLS MATRIX SECTION -->
+  <!-- ======================================================= -->
+  <section class="flex flex-col gap-8 scroll-mt-24" id="skills">
+    <div class="flex flex-col gap-2">
+      <div class="flex items-center gap-2 text-primary font-code-block text-xs uppercase tracking-wider">
+        <span class="material-symbols-outlined text-sm">dashboard_customize</span>
+        <span>CORE COMPETENCIES</span>
+      </div>
+      <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-white font-headline-lg">
+        Technical Skills Matrix
+      </h2>
+      <p class="text-sm sm:text-base text-on-surface-variant max-w-2xl leading-relaxed">
+        Deep-seated proficiencies engineered across scalable full-stack application tiers, resilient database systems,
+        and robust automated server deployment pipelines.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {% for tier in skills %}
+      <div
+        class="rounded-xl border border-outline-variant bg-surface-container-low p-6 flex flex-col justify-between gap-6 hover:border-outline transition-colors">
+        <div class="flex flex-col gap-4">
+          <!-- Tier Header -->
+          <div class="flex items-center justify-between border-b border-outline-variant/60 pb-4">
+            <div class="flex items-center gap-3">
+              <div class="size-9 rounded bg-surface-container flex items-center justify-center text-primary-container">
+                <span class="material-symbols-outlined text-lg">{{ tier.icon }}</span>
+              </div>
+              <div>
+                <h3 class="text-base font-bold text-white leading-none mb-1">{{ tier.category }}</h3>
+                <p class="text-xs text-on-surface-variant font-code-block">{{ tier.subtitle }}</p>
+              </div>
+            </div>
+            <span
+              class="px-2 py-0.5 rounded text-[10px] font-code-block font-semibold bg-surface-container text-outline border border-outline-variant">
+              {{ tier.badge }}
+            </span>
+          </div>
+
+          <!-- Skill Badges / Pills -->
+          <div class="flex flex-wrap gap-2 pt-2">
+            {% for skill in tier.skills %}
+            <span
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-code-block bg-surface-container text-on-surface border border-outline-variant/60 hover:border-primary-container hover:text-white transition-all">
+              <span class="size-1.5 rounded-full bg-primary-container"></span>
+              <span>{{ skill }}</span>
+            </span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- ======================================================= -->
+  <!-- FEATURED PROJECTS SECTION -->
+  <!-- ======================================================= -->
+  <section class="flex flex-col gap-8 scroll-mt-24" id="projects">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+      <div class="flex flex-col gap-2">
+        <div class="flex items-center gap-2 text-primary font-code-block text-xs uppercase tracking-wider">
+          <span class="material-symbols-outlined text-sm">terminal</span>
+          <span>PRODUCTION ARCHITECTURE</span>
+        </div>
+        <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-white font-headline-lg">
+          Featured Engineered Systems
+        </h2>
+        <p class="text-sm sm:text-base text-on-surface-variant max-w-2xl leading-relaxed">
+          Production-grade systems highlighting clean architectural decoupling, high-throughput database queries, and
+          stable infrastructure.
+        </p>
+      </div>
+
+      <a class="inline-flex items-center gap-2 text-xs font-code-block text-primary hover:underline w-fit"
+        href="{{ profile.github }}" rel="noopener noreferrer" target="_blank">
+        <span>Explore All Repositories</span>
+        <span class="material-symbols-outlined text-sm">open_in_new</span>
+      </a>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {% for project in projects %}
+      <article
+        class="rounded-xl border border-outline-variant bg-surface-container-low overflow-hidden flex flex-col justify-between group hover:border-primary-container transition-all shadow-sm">
+
+        <!-- Image and Badge -->
+        <div class="relative aspect-video w-full overflow-hidden bg-surface-container border-b border-outline-variant">
+          <img alt="{{ project.title }}"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            src="{{ url_for('static', filename=project.image) }}">
+          <div class="absolute top-3 left-3">
+            <span
+              class="px-2.5 py-1 rounded text-[11px] font-code-block font-semibold bg-surface-container-highest/90 text-primary border border-primary/20 backdrop-blur-sm">
+              {{ project.badge }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Body Content -->
+        <div class="p-6 flex flex-col gap-5 flex-grow justify-between">
+          <div class="flex flex-col gap-3">
+            <h3 class="text-lg sm:text-xl font-bold text-white group-hover:text-primary transition-colors leading-snug">
+              {{ project.title }}
+            </h3>
+            <p class="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+              {{ project.description }}
+            </p>
+          </div>
+
+          <!-- Specs Grid -->
+          <div class="grid grid-cols-1 gap-2 pt-4 border-t border-outline-variant/60 font-code-block text-xs">
+            {% for spec in project.specs %}
+            <div class="flex items-center justify-between text-on-surface-variant">
+              <span class="text-outline text-[11px]">{{ spec.label }}:</span>
+              <span class="text-white font-medium">{{ spec.value }}</span>
+            </div>
+            {% endfor %}
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex items-center gap-3 pt-3">
+            <a class="flex-1 inline-flex items-center justify-center gap-2 h-9 px-4 rounded bg-primary-container text-on-surface-container text-xs font-bold font-code-block hover:brightness-110 transition-all"
+              href="{{ project.demo_url }}" {% if project.demo_url.startswith('http') %}target="_blank" rel="noopener noreferrer"{% endif %}>
+              <span class="material-symbols-outlined text-sm">rocket_launch</span>
+              <span>{{ project.demo_label|default('LIVE DEMO') }}</span>
+            </a>
+            <a class="inline-flex items-center justify-center gap-2 h-9 px-4 rounded border border-outline-variant bg-surface-container text-xs font-code-block text-white hover:border-primary transition-colors"
+              href="{{ project.source_url }}" rel="noopener noreferrer" target="_blank">
+              <span class="material-symbols-outlined text-sm">code</span>
+              <span>Source Code</span>
+            </a>
+          </div>
+        </div>
+
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- ======================================================= -->
+  <!-- EDUCATION & TIMELINE SECTION -->
+  <!-- ======================================================= -->
+  <section class="flex flex-col gap-8 scroll-mt-24" id="timeline">
+    <div class="flex flex-col gap-2">
+      <div class="flex items-center gap-2 text-primary font-code-block text-xs uppercase tracking-wider">
+        <span class="material-symbols-outlined text-sm">history_edu</span>
+        <span>ACADEMIC FOUNDATION &amp; TRAINING</span>
+      </div>
+      <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-white font-headline-lg">
+        Education &amp; Technical Milestones
+      </h2>
+      <p class="text-sm sm:text-base text-on-surface-variant max-w-2xl leading-relaxed">
+        Formal engineering qualifications, structured computer science foundations, and practical software design
+        institutes.
+      </p>
+    </div>
+
+    <!-- Timeline Cards -->
+    <div class="flex flex-col gap-6">
+      {% for item in education %}
+      <div
+        class="rounded-xl border border-outline-variant bg-surface-container-low p-6 flex flex-col md:flex-row justify-between gap-6 hover:border-outline transition-colors">
+        <div class="flex flex-col gap-3 flex-1">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="px-2.5 py-1 rounded text-[10px] font-code-block font-semibold border {{ item.badge_style }}">
+              {{ item.badge }}
+            </span>
+            <span class="text-xs font-code-block text-outline">{{ item.status }}</span>
+          </div>
+          <div>
+            <h3 class="text-lg sm:text-xl font-bold text-white mb-1">{{ item.title }}</h3>
+            <div class="text-sm font-semibold text-primary font-code-block">{{ item.institution }}</div>
+          </div>
+          <p class="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+            {{ item.description }}
+          </p>
+        </div>
+
+        <div
+          class="flex flex-wrap md:flex-col justify-end items-start md:items-end gap-2 shrink-0 md:w-56 font-code-block text-xs">
+          {% for tag in item.tags %}
+          <span
+            class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant border border-outline-variant/40 text-[11px]">
+            {{ tag }}
+          </span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- ======================================================= -->
+  <!-- CONTACT & COMMUNICATION SECTION -->
+  <!-- ======================================================= -->
+  <section class="flex flex-col gap-8 scroll-mt-24" id="contact">
+    <div class="flex flex-col gap-2">
+      <div class="flex items-center gap-2 text-primary font-code-block text-xs uppercase tracking-wider">
+        <span class="material-symbols-outlined text-sm">alternate_email</span>
+        <span>COMMUNICATION CHANNELS</span>
+      </div>
+      <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-white font-headline-lg">
+        Initiate Engineering Contact
+      </h2>
+      <p class="text-sm sm:text-base text-on-surface-variant max-w-2xl leading-relaxed">
+        Interested in bringing senior-level reliability, distributed backend expertise, or automated DevOps pipelines to
+        your organization? Let's connect.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+      <!-- Contact Form -->
+      <div
+        class="lg:col-span-7 rounded-xl border border-outline-variant bg-surface-container-low p-6 sm:p-8 flex flex-col gap-6">
+        <h3 class="text-lg font-bold text-white flex items-center gap-2 border-b border-outline-variant/60 pb-4">
+          <span class="material-symbols-outlined text-primary">send</span>
+          <span>Send Direct Message</span>
+        </h3>
+
+        <!-- Form Posts to /contact -->
+        <form action="{{ url_for('contact') }}" class="flex flex-col gap-4" id="portfolioContactForm" method="POST">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-code-block text-on-surface-variant" for="fullName">Full Name *</label>
+              <input
+                class="w-full bg-surface-container border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary rounded px-3.5 py-2.5 text-sm text-white placeholder-outline transition-colors outline-none"
+                id="fullName" name="name" placeholder="e.g. Alexander Vance" required type="text">
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-code-block text-on-surface-variant" for="emailAddr">Email Address *</label>
+              <input
+                class="w-full bg-surface-container border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary rounded px-3.5 py-2.5 text-sm text-white placeholder-outline transition-colors outline-none"
+                id="emailAddr" name="email" placeholder="alexander@company.com" required type="email">
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-code-block text-on-surface-variant" for="subject">Subject / Opportunity
+              Scope</label>
+            <input
+              class="w-full bg-surface-container border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary rounded px-3.5 py-2.5 text-sm text-white placeholder-outline transition-colors outline-none"
+              id="subject" name="subject" placeholder="Software Engineering Role / Technical Collaboration" type="text">
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-code-block text-on-surface-variant" for="messageBody">Project or Position Details
+              *</label>
+            <textarea
+              class="w-full bg-surface-container border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary rounded px-3.5 py-2.5 text-sm text-white placeholder-outline transition-colors outline-none resize-none"
+              id="messageBody" name="message"
+              placeholder="Please outline the engineering scope, tech stack, or team role..." required
+              rows="4"></textarea>
+          </div>
+
+          <button
+            class="mt-2 inline-flex items-center justify-center gap-2 h-11 px-6 rounded bg-primary-container text-on-surface-container font-bold text-sm tracking-wide hover:brightness-110 active:scale-[0.99] transition-all shadow-md shadow-primary-container/20 cursor-pointer"
+            id="submitBtn" type="submit">
+            <span class="material-symbols-outlined text-lg">outgoing_mail</span>
+            <span>Send Message</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Direct Channels & Availability Column -->
+      <div class="lg:col-span-5 flex flex-col gap-6">
+
+        <!-- Channels Card -->
+        <div class="rounded-xl border border-outline-variant bg-surface-container-low p-6 flex flex-col gap-5">
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">hub</span>
+            <span>Direct Channels</span>
+          </h3>
+
+          <div class="flex flex-col gap-3 font-code-block text-xs">
+            {% for channel in social_links %}
+            <a class="p-3 rounded-lg bg-surface-container border border-outline-variant hover:border-primary-container flex items-center justify-between group transition-colors"
+              href="{{ channel.href }}" {% if channel.href.startswith('http') %}rel="noopener noreferrer"
+              target="_blank" {% endif %}>
+              <div class="flex items-center gap-3">
+                <div class="size-8 rounded {{ channel.icon_bg }} flex items-center justify-center">
+                  <span class="material-symbols-outlined text-sm">{{ channel.icon }}</span>
+                </div>
+                <div>
+                  <div class="text-white font-medium">{{ channel.title }}</div>
+                  <div class="text-on-surface-variant text-[11px]">{{ channel.value }}</div>
+                </div>
+              </div>
+              <span
+                class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-base">{{
+                channel.action_icon }}</span>
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Global Availability Card -->
+        <div class="rounded-xl border border-outline-variant bg-surface-container-low p-6 flex flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <span class="font-code-block text-xs uppercase text-on-surface-variant">Global Availability</span>
+            <span
+              class="px-2 py-0.5 rounded text-[10px] font-bold font-code-block bg-[#0bda57]/20 text-[#0bda57] border border-[#0bda57]/30">
+              {{ profile.availability_badge }}
+            </span>
+          </div>
+          <p class="text-xs text-on-surface-variant leading-relaxed">
+            {{ profile.availability_description }}
+          </p>
+          <div class="pt-2 flex items-center gap-2 text-xs font-code-block text-outline">
+            <span class="material-symbols-outlined text-sm">schedule</span>
+            <span>{{ profile.timezone }}</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+</main>
+{% endblock %}

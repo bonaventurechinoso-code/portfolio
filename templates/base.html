@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html class="dark scroll-smooth" lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -9,16 +10,19 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;700&family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;700&family=Noto+Sans:wght@400;600;700&display=swap"
+    rel="stylesheet">
+
   <!-- Material Symbols Outlined -->
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet">
 
   <!-- Suppress CDN warning in console -->
   <script>
-    (function() {
+    (function () {
       const _warn = console.warn;
-      console.warn = function(...args) {
+      console.warn = function (...args) {
         if (args[0] && typeof args[0] === 'string' && args[0].includes('cdn.tailwindcss.com')) return;
         _warn.apply(console, args);
       };
@@ -122,51 +126,64 @@
       font-feature-settings: 'liga';
       -webkit-font-smoothing: antialiased;
     }
+
     .bg-grid-pattern {
       background-size: 32px 32px;
-      background-image: 
+      background-image:
         linear-gradient(to right, rgba(62, 72, 79, 0.15) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(62, 72, 79, 0.15) 1px, transparent 1px);
     }
   </style>
 </head>
-<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-fixed min-h-screen flex flex-col relative antialiased">
-  
+
+<body
+  class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-fixed min-h-screen flex flex-col relative antialiased">
+
   <!-- BACKGROUND SUBTLE GRID -->
   <div class="fixed inset-0 bg-grid-pattern pointer-events-none opacity-40 z-0"></div>
 
   <!-- NAVIGATION HEADER -->
   <header class="sticky top-0 z-50 w-full backdrop-blur-md bg-background/80 border-b border-outline-variant/60">
     <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-      
+
       <!-- Brand Logo / Monogram -->
       <a class="flex items-center gap-2.5 group focus:outline-none" href="{{ url_for('index') }}#hero">
-        <div class="size-8 rounded bg-primary-container flex items-center justify-center text-on-primary-fixed font-code-block font-bold text-sm tracking-tighter shadow-sm group-hover:scale-105 transition-transform">
+        <div
+          class="size-8 rounded bg-primary-container flex items-center justify-center text-on-primary-fixed font-code-block font-bold text-sm tracking-tighter shadow-sm group-hover:scale-105 transition-transform">
           {{ profile.initials|default('BCM') }}
         </div>
-        <span class="text-[10px] text-outline font-code-block uppercase tracking-wider group-hover:text-primary transition-colors">
+        <span
+          class="text-[10px] text-outline font-code-block uppercase tracking-wider group-hover:text-primary transition-colors">
           STATUS: ACTIVE
         </span>
       </a>
 
       <!-- Desktop Nav Links -->
       <nav class="hidden md:flex items-center gap-8 text-xs font-code-block tracking-wider uppercase">
-        <a class="text-on-surface-variant hover:text-primary transition-colors" href="{{ url_for('index') }}#hero">Overview</a>
-        <a class="text-on-surface-variant hover:text-primary transition-colors" href="{{ url_for('index') }}#skills">Skills</a>
-        <a class="text-on-surface-variant hover:text-primary transition-colors" href="{{ url_for('index') }}#projects">Projects</a>
-        <a class="text-on-surface-variant hover:text-primary transition-colors" href="{{ url_for('index') }}#timeline">Timeline</a>
-        <a class="text-on-surface-variant hover:text-primary transition-colors" href="{{ url_for('index') }}#contact">Contact</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors"
+          href="{{ url_for('index') }}#hero">Overview</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors"
+          href="{{ url_for('index') }}#skills">Skills</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors"
+          href="{{ url_for('index') }}#projects">Projects</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors"
+          href="{{ url_for('index') }}#timeline">Timeline</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors"
+          href="{{ url_for('index') }}#contact">Contact</a>
       </nav>
 
       <!-- Right CTAs -->
       <div class="flex items-center gap-3">
-        <a class="hidden sm:inline-flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-lg bg-slate-800/80 text-slate-200 border border-slate-700 font-semibold text-xs tracking-wide transition-all duration-200 ease-in-out hover:bg-slate-700 hover:text-white hover:border-slate-500 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950" href="{{ url_for('view_resume') }}">
+        <a class="hidden sm:inline-flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-lg bg-slate-800/80 text-slate-200 border border-slate-700 font-semibold text-xs tracking-wide transition-all duration-200 ease-in-out hover:bg-slate-700 hover:text-white hover:border-slate-500 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950"
+          href="{{ url_for('view_resume') }}">
           <span class="material-symbols-outlined text-sm">visibility</span>
           <span>Resume</span>
         </a>
 
         <!-- Mobile Drawer Toggle -->
-        <button aria-label="Toggle navigation menu" class="md:hidden size-9 rounded border border-outline-variant flex items-center justify-center text-white hover:text-primary transition-colors" id="mobileNavOpenBtn" type="button">
+        <button aria-label="Toggle navigation menu"
+          class="md:hidden size-9 rounded border border-outline-variant flex items-center justify-center text-white hover:text-primary transition-colors"
+          id="mobileNavOpenBtn" type="button">
           <span class="material-symbols-outlined text-lg">menu</span>
         </button>
       </div>
@@ -178,49 +195,62 @@
   <div class="fixed inset-0 z-50 hidden flex-col bg-background/95 backdrop-blur-lg px-6 py-8" id="mobileDrawer">
     <div class="flex items-center justify-between border-b border-outline-variant/60 pb-6">
       <div class="flex items-center gap-2.5">
-        <div class="size-8 rounded bg-primary-container flex items-center justify-center text-on-primary-fixed font-code-block font-bold text-sm">
+        <div
+          class="size-8 rounded bg-primary-container flex items-center justify-center text-on-primary-fixed font-code-block font-bold text-sm">
           {{ profile.initials|default('BCM') }}
         </div>
         <span class="text-[10px] text-outline font-code-block uppercase tracking-wider">
           STATUS: ACTIVE
         </span>
       </div>
-      <button aria-label="Close menu" class="size-9 rounded border border-outline-variant flex items-center justify-center text-white" id="mobileNavCloseBtn" type="button">
+      <button aria-label="Close menu"
+        class="size-9 rounded border border-outline-variant flex items-center justify-center text-white"
+        id="mobileNavCloseBtn" type="button">
         <span class="material-symbols-outlined text-lg">close</span>
       </button>
     </div>
 
     <nav class="flex flex-col gap-6 pt-10 text-base font-code-block uppercase tracking-wider">
-      <a class="mobileNavClose text-white hover:text-primary transition-colors" href="{{ url_for('index') }}#hero">Overview</a>
-      <a class="mobileNavClose text-white hover:text-primary transition-colors" href="{{ url_for('index') }}#skills">Skills</a>
-      <a class="mobileNavClose text-white hover:text-primary transition-colors" href="{{ url_for('index') }}#projects">Projects</a>
-      <a class="mobileNavClose text-white hover:text-primary transition-colors" href="{{ url_for('index') }}#timeline">Timeline</a>
-      <a class="mobileNavClose text-white hover:text-primary transition-colors" href="{{ url_for('index') }}#contact">Contact</a>
-      <a class="mobileNavClose text-white hover:text-primary transition-colors flex items-center justify-between" href="{{ url_for('view_resume') }}">
+      <a class="mobileNavClose text-white hover:text-primary transition-colors"
+        href="{{ url_for('index') }}#hero">Overview</a>
+      <a class="mobileNavClose text-white hover:text-primary transition-colors"
+        href="{{ url_for('index') }}#skills">Skills</a>
+      <a class="mobileNavClose text-white hover:text-primary transition-colors"
+        href="{{ url_for('index') }}#projects">Projects</a>
+      <a class="mobileNavClose text-white hover:text-primary transition-colors"
+        href="{{ url_for('index') }}#timeline">Timeline</a>
+      <a class="mobileNavClose text-white hover:text-primary transition-colors"
+        href="{{ url_for('index') }}#contact">Contact</a>
+      <a class="mobileNavClose text-white hover:text-primary transition-colors flex items-center justify-between"
+        href="{{ url_for('view_resume') }}">
         <span>Resume Preview</span>
         <span class="text-[10px] text-primary border border-primary/40 px-2 py-0.5 rounded font-mono">PDF</span>
       </a>
-      <a class="mobileNavClose text-outline hover:text-primary transition-colors text-sm" href="{{ url_for('view_messages') }}">Admin Messages</a>
+      <a class="mobileNavClose text-outline hover:text-primary transition-colors text-sm"
+        href="{{ url_for('view_messages') }}">Admin Messages</a>
     </nav>
   </div>
 
   <!-- FLASH MESSAGES ALERT -->
   {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-      <div class="max-w-7xl mx-auto px-6 pt-4 w-full z-20">
-        {% for category, message in messages %}
-          <div class="p-4 rounded-lg flex items-center justify-between gap-3 {% if category == 'error' %}bg-red-950/80 border border-red-500/50 text-red-200{% else %}bg-primary-container/20 border border-primary/50 text-primary-fixed{% endif %} shadow-lg backdrop-blur-md">
-            <div class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-base">{% if category == 'error' %}error{% else %}check_circle{% endif %}</span>
-              <span class="text-sm font-code-block font-medium">{{ message }}</span>
-            </div>
-            <button onclick="this.parentElement.remove()" class="text-outline hover:text-white transition-colors" type="button">
-              <span class="material-symbols-outlined text-sm">close</span>
-            </button>
-          </div>
-        {% endfor %}
+  {% if messages %}
+  <div class="max-w-7xl mx-auto px-6 pt-4 w-full z-20">
+    {% for category, message in messages %}
+    <div
+      class="p-4 rounded-lg flex items-center justify-between gap-3 {% if category == 'error' %}bg-red-950/80 border border-red-500/50 text-red-200{% else %}bg-primary-container/20 border border-primary/50 text-primary-fixed{% endif %} shadow-lg backdrop-blur-md">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-base">{% if category == 'error' %}error{% else %}check_circle{%
+          endif %}</span>
+        <span class="text-sm font-code-block font-medium">{{ message }}</span>
       </div>
-    {% endif %}
+      <button onclick="this.parentElement.remove()" class="text-outline hover:text-white transition-colors"
+        type="button">
+        <span class="material-symbols-outlined text-sm">close</span>
+      </button>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
   {% endwith %}
 
   <!-- MAIN VIEWPORT -->
@@ -230,7 +260,8 @@
 
   <!-- FOOTER -->
   <footer class="border-t border-outline-variant/60 py-12 px-6 z-10 bg-surface/50">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-on-surface-variant font-code-block">
+    <div
+      class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-on-surface-variant font-code-block">
       <div class="flex items-center gap-3">
         <div class="size-3 rounded-full bg-primary-container"></div>
         <span class="text-white font-bold">{{ profile.name }}</span>
@@ -310,5 +341,5 @@
     sections.forEach(section => observer.observe(section));
   </script>
 </body>
-</html>
 
+</html>

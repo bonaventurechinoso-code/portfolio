@@ -16,7 +16,7 @@ PROFILE = {
         "Specializing in robust Python/Django enterprise systems, enterprise Java workflows, "
         "modular front-end architecture, and zero-downtime deployment automation."
     ),
-    "email": "bonaventure.mabia@example.com",
+    "email": "bonaventure.chinoso@gmail.com",
     "timezone": "WAT / UTC+1 · Flexible Remote Overlap",
     "availability_description": (
         "Available for full-time engineering roles, high-impact remote distributed teams, "
@@ -190,8 +190,8 @@ SOCIAL_LINKS = [
     {
         "id": "email",
         "title": "Direct Email",
-        "value": "bonaventure.mabia@example.com",
-        "href": "mailto:bonaventure.mabia@example.com",
+        "value": "bonaventure.chinoso@gmail.com",
+        "href": "mailto:bonaventure.chinoso@gmail.com",
         "icon": "mail",
         "icon_bg": "bg-primary-container/10 text-primary-container",
         "action_icon": "arrow_forward"

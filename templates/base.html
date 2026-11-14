@@ -144,7 +144,7 @@
 
   <!-- NAVIGATION HEADER -->
   <header class="sticky top-0 z-50 w-full backdrop-blur-md bg-background/80 border-b border-outline-variant/60">
-    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
 
       <!-- Brand Logo / Monogram -->
       <a class="flex items-center gap-2.5 group focus:outline-none" href="{{ url_for('index') }}#hero">
@@ -259,10 +259,10 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="border-t border-outline-variant/60 py-12 px-6 z-10 bg-surface/50">
+  <footer class="border-t border-outline-variant/60 py-8 sm:py-12 px-4 sm:px-6 z-10 bg-surface/50">
     <div
-      class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-on-surface-variant font-code-block">
-      <div class="flex items-center gap-3">
+      class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 text-xs text-on-surface-variant font-code-block text-center md:text-left">
+      <div class="flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-3">
         <div class="size-3 rounded-full bg-primary-container"></div>
         <span class="text-white font-bold">{{ profile.name }}</span>
         <span class="text-outline">/</span>
@@ -271,7 +271,7 @@
       <div>
         Designed for High-Performance Systems &amp; Clean Architecture
       </div>
-      <div class="text-outline flex items-center gap-3">
+      <div class="text-outline flex flex-wrap items-center justify-center md:justify-end gap-3">
         <span>&copy; <span id="currentYear">2026</span> All rights reserved.</span>
         <span>·</span>
         <a href="{{ url_for('view_messages') }}" class="hover:text-primary transition-colors">Admin Log</a>

@@ -6,10 +6,10 @@
   <!-- ======================================================= -->
   <!-- HERO SECTION -->
   <!-- ======================================================= -->
-  <section class="flex flex-col lg:flex-row items-center lg:items-center justify-start gap-6 lg:gap-8 pt-2 lg:pt-6 max-w-5xl" id="hero">
+  <section class="grid grid-cols-1 lg:grid-cols-12 items-center gap-12 pt-4 lg:pt-8" id="hero">
 
-    <!-- Hero Left: Bio & Details -->
-    <div class="flex-1 flex flex-col gap-6 max-w-2xl order-2 lg:order-1">
+    <!-- Hero Left: Bio & Details (7 columns on desktop) -->
+    <div class="lg:col-span-7 flex flex-col gap-6 order-2 lg:order-1">
 
       <!-- Availability Chip -->
       <div
@@ -73,43 +73,22 @@
 
     </div>
 
-    <!-- Hero Right: Avatar Circular Card Tight with Text -->
-    <div class="w-auto flex flex-col items-center justify-center flex-shrink-0 order-1 lg:order-2 my-2 lg:my-0">
-      <div class="relative flex items-center justify-center group">
-        <!-- Soft Cyan Glow in Accent Color (#00E5FF) -->
-        <div
-          class="absolute -inset-2 bg-[#00E5FF] opacity-35 blur-xl group-hover:opacity-55 transition-opacity duration-300 pointer-events-none"
-          style="border-radius: 50%;">
+    <!-- Hero Right: Clean Executive Profile Image (5 columns on desktop) -->
+    <div class="lg:col-span-5 flex justify-center lg:justify-end order-1 lg:order-2">
+      <div class="relative mx-auto lg:mx-0">
+        <!-- Clean Subtle Border & Ring - No Heavy Glow/Cyan -->
+        <div class="relative w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full p-1 border border-slate-700/80 ring-4 ring-slate-900/50 bg-surface-container shadow-xl">
+          <img
+            src="{{ url_for('static', filename=profile.avatar) }}"
+            alt="{{ profile.name }}"
+            class="w-full h-full object-cover object-top rounded-full"
+          />
         </div>
 
-        <!-- 4px Border in Accent Color (#00E5FF) - 100% Perfect Circle (260px desktop, 180px mobile) -->
-        <div
-          class="relative w-[180px] h-[180px] lg:w-[260px] lg:h-[260px] p-[3px] bg-[#00E5FF] shadow-[0_0_25px_rgba(0,229,255,0.45),0_0_50px_rgba(0,229,255,0.2)]"
-          style="border-radius: 50%; border: 4px solid #00E5FF; box-sizing: border-box;">
-          <!-- Inner Circular Image Frame with Tight Crop to Eliminate White Background -->
-          <div
-            class="relative w-full h-full overflow-hidden bg-[#0f131c]"
-            style="border-radius: 50%;">
-            <img
-              src="{{ url_for('static', filename=profile.avatar) }}"
-              alt="{{ profile.name }}"
-              class="w-full h-full object-cover filter contrast-[1.05]"
-              style="object-position: center 15%; transform: scale(1.3); border-radius: 50%;"
-            />
-            <!-- Subtle Dark Vignette & Bottom Gradient to blend seamlessly with dark theme -->
-            <div
-              class="absolute inset-0 pointer-events-none"
-              style="border-radius: 50%; background: radial-gradient(circle, transparent 55%, rgba(15, 19, 28, 0.45) 85%, rgba(15, 19, 28, 0.85) 100%), linear-gradient(to top, rgba(15, 19, 28, 0.75) 0%, transparent 40%);">
-            </div>
-          </div>
-        </div>
-
-        <!-- Status Badge Overlapping the Bottom of the Circle: Green Dot + OPEN TO WORK -->
-        <div
-          class="absolute -bottom-2.5 left-1/2 -translate-x-1/2 z-20 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1 bg-[#181c24] border border-[#00E5FF]/50 shadow-xl shadow-black/90 font-code-block text-[10px] lg:text-[11px] font-bold text-white tracking-wider"
-          style="border-radius: 9999px;">
-          <span class="size-2 bg-[#0bda57] animate-pulse shadow-[0_0_8px_#0bda57]" style="border-radius: 50%;"></span>
-          <span class="text-white">OPEN TO WORK</span>
+        <!-- Polished Minimal "OPEN TO WORK" Badge -->
+        <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap inline-flex items-center gap-2 bg-slate-900/90 backdrop-blur-md border border-slate-700 text-xs font-medium px-3.5 py-1 rounded-full text-slate-200 shadow-md">
+          <span class="size-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="font-code-block tracking-wider font-semibold">OPEN TO WORK</span>
         </div>
       </div>
     </div>

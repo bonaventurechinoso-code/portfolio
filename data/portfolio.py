@@ -109,74 +109,38 @@ SKILLS = [
 
 PROJECTS = [
     {
-        "id": "erp-platform",
-        "badge": "Full-Stack Enterprise",
-        "title": "Enterprise Resource & Inventory Management Platform",
+        "id": "school-erp",
+        "badge": "Multi-Tenant & Multi-Tier",
+        "title": "School ERP - Multi-tenant, Multi-tier Staff and Students Lifecycle",
         "description": (
-            "Architected a centralized supply chain tracking engine with ACID-compliant transactions, "
-            "automated reorder thresholds, dynamic batch processing, and granular role-based authorization."
-        ),
-        "image": "images/project-erp.jpg",
-        "specs": [
-            {"label": "Back-End", "value": "Django + Python REST API"},
-            {"label": "Database", "value": "PostgreSQL with Index Tuning"},
-            {"label": "Front-End", "value": "JavaScript ES6 + Bootstrap UI"}
-        ],
-        "demo_url": "#projects",
-        "source_url": "https://github.com/bonaventurechinoso-code"
-    },
-    {
-        "id": "devops-agent",
-        "badge": "DevOps & Infra",
-        "title": "Automated Micro-Deployment & Health Monitoring Agent",
-        "description": (
-            "Engineered an asynchronous daemon service to monitor VM server health, automate zero-downtime "
-            "rolling git deployments, analyze Nginx access logs, and notify incident triggers via webhooks."
-        ),
-        "image": "images/project-agent.jpg",
-        "specs": [
-            {"label": "DevOps Tool", "value": "Python CLI & Linux Daemons"},
-            {"label": "Storage", "value": "PostgreSQL Metrics Time-Series"},
-            {"label": "CI / CD", "value": "Git Hooks & Bash Automation"}
-        ],
-        "demo_url": "#projects",
-        "source_url": "https://github.com/bonaventurechinoso-code"
-    },
-    {
-        "id": "academic-portal",
-        "badge": "Enterprise Java",
-        "title": "FIT School ERP / Academic Records Platform",
-        "description": (
-            "Developed an institutional grading and course registry platform employing rigid OOP separation, "
-            "normalized relational database structures, and automated GPA algorithms. "
-            "Engineered as a modern PWA - installable, works offline with service worker."
+            "School ERP built to manage the full lifecycle of staff and students for multiple schools "
+            "(tenants) on one system. Handles student admission and enrollment, course registry, "
+            "grading and GPA, and staff records, using a multi-tier architecture."
         ),
         "image": "images/project-portal.jpg",
         "specs": [
-            {"label": "Back-End", "value": "Java Core + OOP Architecture"},
-            {"label": "Database", "value": "SQL Server / PostgreSQL Schema"},
-            {"label": "Front-End", "value": "Responsive PWA (Offline Service Worker)"}
+            {"label": "Back-End", "value": "Java Core + OOP"},
+            {"label": "Database", "value": "SQL Server / PostgreSQL"},
+            {"label": "Front-End", "value": "HTML/CSS/JS, PWA"}
         ],
         "demo_url": "https://bonaveeict.com.ng",
-        "demo_label": "LIVE PRODUCTION",
-        "source_url": "https://github.com/bonaventurechinoso-code"
+        "demo_label": "LIVE DEMO"
     },
     {
-        "id": "fintech-gateway",
-        "badge": "FinTech API",
-        "title": "Secure FinTech Transaction Gateway Simulation",
+        "id": "bcm-portfolio",
+        "badge": "Personal Portfolio",
+        "title": "BCM Portfolio",
         "description": (
-            "Implemented idempotent financial payment gateway endpoints featuring JWT security tokens, "
-            "webhook retry exponential backoffs, and strict ACID double-entry ledger database logic."
+            "My personal portfolio site built to show my profile, skills, projects and contact."
         ),
-        "image": "images/project-fintech.jpg",
+        "image": "images/project-erp.jpg",
         "specs": [
-            {"label": "API Layer", "value": "Django REST Framework (DRF)"},
-            {"label": "Security", "value": "JWT & HMAC Signature Verification"},
-            {"label": "Data Engine", "value": "PostgreSQL Locking & Isolation"}
+            {"label": "Back-End", "value": "Python, Flask"},
+            {"label": "Front-End", "value": "HTML/CSS, JavaScript"}
         ],
-        "demo_url": "#projects",
-        "source_url": "https://github.com/bonaventurechinoso-code"
+        "demo_url": "/",
+        "demo_label": "LIVE DEMO",
+        "source_url": "https://github.com/bonaventurechinoso-code/portfolio"
     }
 ]
 

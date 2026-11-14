@@ -46,6 +46,14 @@ def create_app(config_class=Config):
         return app.send_static_file("images/bonaventure-passport.jpg")
 
     # -------------------------------------------------------------------------
+    # Route: GET /projects
+    # -------------------------------------------------------------------------
+    @app.route("/projects", methods=["GET"])
+    def projects():
+        """Route /projects to featured projects section on homepage."""
+        return redirect(url_for("index") + "#projects")
+
+    # -------------------------------------------------------------------------
     # Route: POST /contact
     # -------------------------------------------------------------------------
     @app.route("/contact", methods=["POST"])
@@ -199,10 +207,8 @@ def create_app(config_class=Config):
             f"=======================================================\n\n"
             f"PROFILE SUMMARY:\n{PROFILE['hero_bio']}\n\n"
             f"CORE ARCHITECTURES & PROJECTS:\n"
-            f"1. Enterprise Resource & Inventory Management Platform\n"
-            f"2. Automated Micro-Deployment & Health Monitoring Agent\n"
-            f"3. Distributed Academic Records & Portal System\n"
-            f"4. Secure FinTech Transaction Gateway Simulation\n\n"
+            f"1. School ERP - Multi-tenant, Multi-tier Staff and Students Lifecycle\n"
+            f"2. BCM Portfolio\n\n"
             f"EDUCATION:\n"
             f"- Higher National Diploma (HND) in Computer Science (Federal Poly Oko)\n"
             f"- National Diploma (ND) in Computer Science (Federal Poly Oko)\n"

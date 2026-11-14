@@ -221,11 +221,13 @@
               <span class="material-symbols-outlined text-sm">rocket_launch</span>
               <span>{{ project.demo_label|default('LIVE DEMO') }}</span>
             </a>
+            {% if project.source_url %}
             <a class="inline-flex items-center justify-center gap-2 h-9 px-4 rounded border border-outline-variant bg-surface-container text-xs font-code-block text-white hover:border-primary transition-colors"
               href="{{ project.source_url }}" rel="noopener noreferrer" target="_blank">
               <span class="material-symbols-outlined text-sm">code</span>
               <span>Source Code</span>
             </a>
+            {% endif %}
           </div>
         </div>
 

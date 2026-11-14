@@ -6,7 +6,7 @@ A modern, high-performance Full-Stack Software & DevOps Engineering portfolio bu
 
 ## 🌐 Live Demo & Production Links
 
-* **Live Production Server (FIT School ERP):** [https://bonaveeict.com.ng](https://bonaveeict.com.ng)
+* **Live Production Server (School ERP):** [https://bonaveeict.com.ng](https://bonaveeict.com.ng)
 * **GitHub Profile:** [https://github.com/bonaventurechinoso-code](https://github.com/bonaventurechinoso-code)
 * **Local Development Engine:** [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
@@ -108,6 +108,6 @@ All site content is decoupled from HTML into clean Python data structures in [`d
 
 * **Developer Profile (`PROFILE`):** Change `name`, `title`, `avatar` (`images/bonaventure-passport.jpg`), `hero_bio`, `availability_status`, `email`, and timezone.
 * **Skills Matrix (`SKILLS`):** Modify tier categories (`Front-End Tier`, `Back-End & Data`, `DevOps & Infra`) and clean technology skill badges.
-* **Featured Projects (`PROJECTS`):** Add, update, or reorder systems (e.g. ERP platform, Micro-Deployment Agent, Academic Portal, FinTech Gateway), including labels, specs, and repository URLs.
+* **Featured Projects (`PROJECTS`):** Add, update, or reorder systems (e.g. School ERP, BCM Portfolio), including labels, specs, and repository URLs.
 * **Education & Credentials (`EDUCATION`):** Update degrees, institutions, and coursework highlights.
 * **Direct Channels (`SOCIAL_LINKS`):** Change links and contact handles for Email, GitHub, and Portfolio.

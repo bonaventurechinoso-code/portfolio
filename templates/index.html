@@ -36,17 +36,17 @@
 
       <!-- Action Buttons -->
       <div class="flex flex-wrap items-center gap-4 pt-2">
-        <a class="inline-flex items-center gap-2 h-11 px-6 rounded bg-primary-container text-on-surface-container font-bold text-sm tracking-wide hover:brightness-110 active:scale-[0.99] transition-all shadow-md shadow-primary-container/20"
+        <a class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-indigo-600 text-white font-semibold text-sm tracking-wide transition-all duration-200 ease-in-out hover:bg-indigo-500 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/25 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-slate-950"
           href="{{ url_for('view_resume') }}">
           <span class="material-symbols-outlined text-base">visibility</span>
           <span>Preview Resume</span>
         </a>
-        <a class="inline-flex items-center gap-2 h-11 px-5 rounded border border-outline-variant bg-surface-container text-xs font-code-block text-on-surface hover:border-primary transition-colors"
+        <a class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-slate-800/80 text-slate-200 border border-slate-700 font-semibold text-sm tracking-wide transition-all duration-200 ease-in-out hover:bg-slate-700 hover:text-white hover:border-slate-500 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950"
           href="{{ profile.github }}" rel="noopener noreferrer" target="_blank">
           <span class="material-symbols-outlined text-base">code</span>
           <span>View GitHub</span>
         </a>
-        <a class="inline-flex items-center gap-2 h-11 px-5 rounded border border-outline-variant bg-surface-container text-xs font-code-block text-on-surface hover:border-primary transition-colors"
+        <a class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-slate-800/80 text-slate-200 border border-slate-700 font-semibold text-sm tracking-wide transition-all duration-200 ease-in-out hover:bg-slate-700 hover:text-white hover:border-slate-500 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950"
           href="#projects">
           <span>Explore Projects</span>
           <span class="material-symbols-outlined text-base">arrow_forward</span>
@@ -219,15 +219,15 @@
 
           <!-- Action Buttons -->
           <div class="flex items-center gap-3 pt-3">
-            <a class="flex-1 inline-flex items-center justify-center gap-2 h-9 px-4 rounded bg-primary-container text-on-surface-container text-xs font-bold font-code-block hover:brightness-110 transition-all"
+            <a class="flex-1 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-indigo-600 text-white font-semibold text-sm tracking-wide transition-all duration-200 ease-in-out hover:bg-indigo-500 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/25 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-slate-950"
               href="{{ project.demo_url }}" {% if project.demo_url.startswith('http') %}target="_blank" rel="noopener noreferrer"{% endif %}>
-              <span class="material-symbols-outlined text-sm">rocket_launch</span>
+              <span class="material-symbols-outlined text-base">rocket_launch</span>
               <span>{{ project.demo_label|default('LIVE DEMO') }}</span>
             </a>
             {% if project.source_url %}
-            <a class="inline-flex items-center justify-center gap-2 h-9 px-4 rounded border border-outline-variant bg-surface-container text-xs font-code-block text-white hover:border-primary transition-colors"
+            <a class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-slate-800/80 text-slate-200 border border-slate-700 font-semibold text-sm tracking-wide transition-all duration-200 ease-in-out hover:bg-slate-700 hover:text-white hover:border-slate-500 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950"
               href="{{ project.source_url }}" rel="noopener noreferrer" target="_blank">
-              <span class="material-symbols-outlined text-sm">code</span>
+              <span class="material-symbols-outlined text-base">code</span>
               <span>Source Code</span>
             </a>
             {% endif %}
@@ -356,9 +356,9 @@
           </div>
 
           <button
-            class="mt-2 inline-flex items-center justify-center gap-2 h-11 px-6 rounded bg-primary-container text-on-surface-container font-bold text-sm tracking-wide hover:brightness-110 active:scale-[0.99] transition-all shadow-md shadow-primary-container/20 cursor-pointer"
+            class="mt-2 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-indigo-600 text-white font-semibold text-sm tracking-wide transition-all duration-200 ease-in-out hover:bg-indigo-500 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/25 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-slate-950 cursor-pointer"
             id="submitBtn" type="submit">
-            <span class="material-symbols-outlined text-lg">outgoing_mail</span>
+            <span class="material-symbols-outlined text-base">outgoing_mail</span>
             <span>Send Message</span>
           </button>
         </form>

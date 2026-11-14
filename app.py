@@ -231,7 +231,10 @@ def create_app(config_class=Config):
     return app
 
 
+app = create_app()
+
 if __name__ == "__main__":
-    app = create_app()
-    print(f">> Python Portfolio Engine running at http://{Config.HOST}:{Config.PORT}")
-    app.run(host=Config.HOST, port=Config.PORT, debug=Config.DEBUG)
+    port = int(os.environ.get("PORT", 5000))
+    host = os.environ.get("HOST", "0.0.0.0")
+    print(f">> Python Portfolio Engine running at http://{host}:{port}")
+    app.run(host=host, port=port, debug=Config.DEBUG)
